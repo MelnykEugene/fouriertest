@@ -1,0 +1,86 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Fourier Drawer</title>
+  <meta name="description" content="Fourier Drawer">
+
+  <link rel="stylesheet" href="css/index.css">
+
+</head>
+
+<body>
+	<canvas id="canvas"></canvas>
+	<script src="js/horse.js"></script>
+	<script src="js/fourier.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
+
+
+
+<!--
+path=[];
+let length=dfts.length;
+let gears = [{
+                frequency: 0,
+                radius: Math.hypot(dfts[0].real, dfts[0].img) / length,
+                offset: Math.atan2(dfts[0].img, dfts[0].real)
+            }];
+
+for (let i=1;i<dfts.length/2;i++){
+	 gears.push({
+                    frequency: i,
+                    radius: Math.hypot(dfts[i].real, dfts[i].img) / length,
+                    offset: Math.atan2(dfts[i].img, dfts[i].real)
+                });
+	    gears.push({
+	        frequency: -i,
+	        radius: Math.hypot(dfts[length - i].real, dfts[length - i].img) / length,
+	        offset: Math.atan2(dfts[length - i].img, dfts[length - i].real)
+	    });
+}
+
+let time=0;
+let x=0;
+let y=0;
+let len=10;
+createCanvas();
+
+function render() {
+		time+=50;
+		clearCanvas();
+        let x = 0;
+        let y = 0;
+
+        for (let gear of gears) {
+            let dx = Math.cos(time / 1000 / len * gear.frequency * 2 * Math.PI + gear.offset) * gear.radius;
+            let dy = Math.sin(time / 1000 / len * gear.frequency * 2 * Math.PI + gear.offset) * gear.radius;
+
+            x += dx;
+            y += dy;
+        }
+
+        if (path.length<10000) path.push({
+            x: x,
+            y: y,
+            time: time
+        });
+
+        ctx.save();
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = 'blue';
+        ctx.beginPath();
+        ctx.moveTo(path[0].x+  0.5* cv.width,path[0].y- 0.9* cv.height);
+        for (let point of path) {
+            ctx.lineTo(point.x + 0.5* cv.width, point.y - 0.9* cv.height);
+        }
+        ctx.stroke();
+        ctx.restore();
+
+        console.log(path);
+        requestAnimationFrame(render);
+    }
+    render();
+    -->

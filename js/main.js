@@ -39,9 +39,13 @@ function clearCanvas(){
 	ctx.fillRect(0,0,2*w,2*h);
 } 
 
+function freeformDraw(){
+
+}
+
 function drawEpicycles(x,y,time,fourier){ 
 	clearCanvas(); 
-	for (i=0;i<fourier.length/2;i++){
+	for (i=1;i<precision;i++){
 		let prevx=x;
 		let prevy=y;
 		let freq=fourier[i].freq;
@@ -69,8 +73,9 @@ function drawEpicycles(x,y,time,fourier){
 }
 
 createCanvas();
-ctx.scale(0.6,0.6);
-   
+
+let animationId;
+
 function draw(){
 	let v=drawEpicycles(w/2,h/2,time,dfts); 
 	path.unshift(v);
@@ -88,11 +93,27 @@ function draw(){
 	const dt = 2*Math.PI/(dfts.length);
 	time+=dt;
 
-	requestAnimationFrame(draw,5000/FPS);
+	animationId=requestAnimationFrame(draw,5000/FPS);
 }
 
 function start(){
 	draw();
+}
+
+
+var slider = document.getElementById("myRange");
+
+let precision_percent=100;
+let precision=Math.round(dfts.length*precision_percent/100);
+
+
+slider.oninput = function() {
+	let precision_percent=this.value;
+	precision=Math.round(dfts.length*precision_percent/100);
+	console.log(precision);
+	cancelAnimationFrame(animationId);
+	path=[];
+	start();
 }
 
 start();
